@@ -15,6 +15,9 @@ return [
 
     'name' => env('APP_NAME'),
 
+    'desc' => env('APP_DESC'),
+
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

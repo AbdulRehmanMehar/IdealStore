@@ -10010,6 +10010,12 @@ body {
   padding: 0;
 }
 
+.background-image {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .v-center {
   height: 100vh;
   display: -webkit-box;
@@ -10075,12 +10081,27 @@ body {
   cursor: default;
 }
 
-.cat-list .item:hover {
+.cat-list .item:hover,
+.cat-list .item.active {
   background: rgba(0, 0, 0, 0.1);
 }
 
-.cat-list .item span {
+.cat-list .item .parent:after {
+  content: " -> ";
+}
+
+.cat-list .item .edit {
   float: right;
+}
+
+.cat-list .item i {
+  cursor: pointer;
+  z-index: 99;
+}
+
+.cat-list .item .editor,
+.cat-list .item .trash {
+  cursor: pointer;
 }
 
 .cat-suggesstion .card-body {

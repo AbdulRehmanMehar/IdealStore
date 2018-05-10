@@ -47332,12 +47332,12 @@ __webpack_require__(43);
 /***/ (function(module, exports) {
 
 // Navbar dynamic active class
-$('#navbarMenu .nav-link').each(function (i, element) {
+$('.navbar-nav .nav-item .nav-link').each(function (i, element) {
   var href = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
   if (href == "") {
     $(element).removeClass('active');
     $(element).attr('href') == window.location.href ? $(element).addClass('active') : '';
-  } else if (href == $(element).attr('href')) {
+  } else if ($(element).attr('href') == href) {
     $(element).addClass('active');
   }
 });

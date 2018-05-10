@@ -4,9 +4,18 @@
     <form method="post" action="savecredentials">
       @csrf
       <h5 class="pt-2 pb-2 text-danger">Basic App Settings</h5>
-      <div class="form-group">
-        <label for="APP_NAME">App Name</label>
-        <input type="text" class="form-control form-control-sm" name="APP_NAME" value="{{$APP_NAME}}">
+      <div class="form-row">
+
+        <div class="form-group col-md-6">
+          <label for="APP_NAME">App Name</label>
+          <input type="text" class="form-control form-control-sm" name="APP_NAME" value="{{$APP_NAME}}">
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="APP_DESC">App Description</label>
+          <input type="text" class="form-control form-control-sm" name="APP_DESC" value="{{$APP_DESC}}">
+        </div>
+
       </div>
       <h5 class="pt-2 pb-2 text-danger">Database Credentials</h5>
       <div class="form-row">
@@ -18,7 +27,7 @@
           <label for="DB_USERNAME">Database Username</label>
           <input type="text" class="form-control form-control-sm" name="DB_USERNAME" value="{{$DB_USERNAME}}">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-4 form-group-pwd">
           <label for="DB_PASSWORD">Database Password</label>
           <input type="text" class="form-control form-control-sm" name="DB_PASSWORD" value="{{$DB_PASSWORD}}">
         </div>

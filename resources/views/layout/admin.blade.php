@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="{{asset('css/admin.css')}}">
+  <link rel="icon" href="{{asset('img/logo.png')}}">
   <title>Admin Area - {{config('app.name')}}</title>
 </head>
 <body>
@@ -24,30 +25,23 @@
             <a href="showcredentials" class="nav-link"><i class="fa fa-key"></i> Credentials</a>
           </li>
           <li class="nav-item">
-            <a href="categories" class="nav-link"><i class="fas fa-th"></i> Categories</a>
+            <a href="categories" class="nav-link"><i class="fas fa-tags"></i> Categories</a>
           </li>
           <li class="nav-item">
-            <a href="users" class="nav-link"><i class="fas fa-users"></i> Users</a>
+            <a href="products" class="nav-link"><i class="fas fa-th"></i> Products</a>
           </li>
         @endguest
       </ul>
       <ul class="navbar-nav ml-auto">
         @guest('admin')
         @else
-          <li class="nav-item dropdown">
-            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-              {{ Auth::user()->name }} <span class="caret"></span>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{{ route('logout') }}"
-                 onclick="event.preventDefault();
-                               document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
-              </a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-              </form>
-            </div>
+          <li class="nav-item">
+            <a class="nav-link"  href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i> Logout</a>
+           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+             @csrf
+           </form>
           </li>
         @endguest
       </ul>
@@ -73,6 +67,6 @@
       }, 5000);
     </script>
   @endif
-
+  @yield('scripts')
 </body>
 </html>
