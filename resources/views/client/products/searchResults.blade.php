@@ -27,7 +27,6 @@
                     <a  class="cat" href="{{url('products/category/' . $requestedProduct->category )}}">
                       <h6>{{$requestedProduct->category}}</h6>
                     </a>
-                    <a href="#" class="btn btn-primary add-to-cart" data-id="{{$requestedProduct->id}}">Add to Cart</a>
                   </div>
                 </div>
               </div>
