@@ -1,4 +1,7 @@
 @extends('layout.client')
+@section('title')
+  Verify Email - {{config('app.name')}}
+@endsection
 @section('content')
   <div class="custom-form-wrapper">
     <div class="container">

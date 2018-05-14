@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Category;
 use App\Product;
+use App\Order;
 use Session;
 use Storage;
 
@@ -29,7 +30,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+      $data = [
+        'orders' => Order::all()
+      ];
+      return view('admin.home')->with($data);
     }
     /*
     |--------------------------------------------------------------------------
@@ -217,6 +221,18 @@ class AdminController extends Controller
       }
       $delete->delete();
       return redirect('admin/products');
-      return ;
+    }
+
+    public function markOrderAsCompleted(Request $request){
+      $update = Order::where('id' , $request->input('i_order_id'))->first();
+      $update->complete_status = "true";
+      $update->save();
+      return redirect('admin/home');
+    }
+    public function markOrderAsInComplete(Request $request){
+      $update = Order::where('id' , $request->input('c_order_id'))->first();
+      $update->complete_status = "false";
+      $update->save();
+      return redirect('admin/home');
     }
 }

@@ -1,4 +1,7 @@
 @extends('layout.client')
+@section('title')
+  Home - {{config('app.name')}}
+@endsection
 @section('content')
   <div class="header" style="background-image: url({{asset('img/bg.jpg')}})">
     {{-- <div class="bg-video">
@@ -64,53 +67,68 @@
   </div>
   {{-- Header Ends..... --}}
   <div class="container-fluid">
-    <div class="product-set">
-      <h3>Popular Products <a href="#">See All</a></h3>
-      <div class="row">
-
-        <div class="col-md-4">
-          <div class="card">
-            <div class="product-img" style="background-image: url(https://dummyimage.com/600x400/000/fff)"></div>
-            <div class="card-body">
-              <h5 class="card-title">Trouser Shirt <small>1000</small></h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div class="info">
-                <h6>Uncategorized</h6>  <a href="#" class="btn btn-primary">Add to Cart</a>
+    {{-- Popular Products --}}
+    @if($popularProducts->isNotEmpty())
+      <div class="product-set">
+        <h3>Popular Products <a href="{{url('products/type/Popular')}}">See All</a></h3>
+        <div class="row">
+          @foreach ($popularProducts as $popularProduct)
+            <div class="col-md-4">
+              <div class="card">
+                <a href="{{url('products/product/' . $popularProduct->slug)}}">
+                  <div class="product-img" style="background-image: url({{asset('storage/product_images/' . $popularProduct->images)}})"></div>
+                </a>
+                <div class="card-body">
+                  <a class="title" href="{{url('products/product/' . $popularProduct->slug)}}">
+                    <h5 class="card-title">{{$popularProduct->name}} <small>{{$popularProduct->price}}</small></h5>
+                  </a>
+                  <p class="card-text">{{ substr($popularProduct->details , 0 , 100) }}</p>
+                  <div class="info">
+                    <a  class="cat" href="{{url('products/category/' . $popularProduct->category )}}">
+                      <h6>{{$popularProduct->category}}</h6>
+                    </a>
+                    <a href="#" class="btn btn-primary add-to-cart" data-id="{{$popularProduct->id}}">Add to Cart</a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          @endforeach
         </div>
-
-
-        <div class="col-md-4">
-          <div class="card">
-            <div class="product-img" style="background-image: url(https://dummyimage.com/600x400/000/fff)"></div>
-            <div class="card-body">
-              <h5 class="card-title">Jeans<small>1000</small></h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div class="info">
-                <h6>Uncategorized</h6>  <a href="#" class="btn btn-primary">Add to Cart</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card">
-            <div class="product-img" style="background-image: url(https://dummyimage.com/600x400/000/fff)"></div>
-            <div class="card-body">
-              <h5 class="card-title">Casual Shirt <small>1000</small></h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div class="info">
-                <h6>Uncategorized</h6>  <a href="#" class="btn btn-primary">Add to Cart</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
+    @endif
 
-    </div>
+
+    {{-- New Products --}}
+    @if($newProducts->isNotEmpty())
+      <div class="product-set">
+        <h3>New Products <a href="{{url('products/type/New')}}">See All</a></h3>
+        <div class="row">
+          @foreach ($newProducts as $newProduct)
+            <div class="col-md-4">
+              <div class="card">
+                <a href="{{url('products/product/' . $newProduct->slug)}}">
+                  <div class="product-img" style="background-image: url({{asset('storage/product_images/' . $newProduct->images)}})"></div>
+                </a>
+                <div class="card-body">
+                  <a class="title" href="{{url('products/product/' . $newProduct->slug)}}">
+                    <h5 class="card-title">{{$newProduct->name}} <small>{{$newProduct->price}}</small></h5>
+                  </a>
+                  <p class="card-text">{{ substr($newProduct->details , 0 , 100) }}</p>
+                  <div class="info">
+                    <a  class="cat" href="{{url('products/category/' . $newProduct->category )}}">
+                      <h6>{{$newProduct->category}}</h6>
+                    </a>
+                    <a href="#" class="btn btn-primary add-to-cart" data-id="{{$newProduct->id}}">Add to Cart</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          @endforeach
+        </div>
+      </div>
+    @endif
+
+
 
   </div>
 @endsection

@@ -47342,6 +47342,15 @@ $('.navbar-nav .nav-item .nav-link').each(function (i, element) {
   }
 });
 
+// dynamic Add-to-Cart
+$('.add-to-cart').each(function (i, element) {
+  $(element).click(function (event) {
+    event.preventDefault();
+    $('#add-to-cart #p_id').val($(element).attr('data-id'));
+    $('#add-to-cart').submit();
+  });
+});
+
 /***/ }),
 /* 44 */
 /***/ (function(module, exports) {

@@ -1,4 +1,9 @@
 @extends('layout.client')
+
+@section('title')
+  Login - {{config('app.name')}}
+@endsection
+
 @section('content')
 
   <div class="custom-form-wrapper">
@@ -42,15 +47,6 @@
                         <strong>{{ $errors->first('password') }}</strong>
                       </span>
                     @endif
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-md-6 offset-md-4">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Remember Me') }}
-                      </label>
-                    </div>
                   </div>
                 </div>
                 <div class="form-group row">

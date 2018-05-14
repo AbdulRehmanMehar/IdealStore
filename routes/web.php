@@ -12,8 +12,27 @@
 */
 
 Route::get('/', 'clientsideController@home');
+Route::get('contact', 'clientsideController@contact');
+Route::post('drop-message', 'clientsideController@dropMessage');
+// error Fix
+Route::get('logout', 'clientsideController@logoutErrorFix');
+
+/*
+|--------------------------------------------------------------------------
+| Product Routes
+|--------------------------------------------------------------------------
+*/
 
 
+Route::get('products/product/{slug}', 'clientsideController@showProduct');
+Route::get('products/category/{name}', 'clientsideController@productsInCategory');
+Route::get('products/type/{type}', 'clientsideController@productsType');
+Route::post('products/search', 'clientsideController@searchProduct');
+Route::post('products/add-to-cart', 'clientsideController@addToCart');
+Route::get('products/show-cart', 'clientsideController@showCart');
+Route::post('products/remove-from-cart', 'clientsideController@removeFromCart');
+Route::post('products/update-cart', 'clientsideController@updateCart');
+Route::get('products/show-cart/place-order', 'clientsideController@placeOrder');
 /*
 |--------------------------------------------------------------------------
 | Client Login Routes
@@ -25,6 +44,7 @@ Route::get('login/{service}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{service}/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::get('home', 'HomeController@index')->name('home');
+Route::post('home/update-profile', 'HomeController@updateProfile');
 
 Route::get('verifyEmail', 'Auth\RegisterController@verifyEmail')->name('verifyEmail');
 Route::get('verify/{email}/{verifyToken}', 'Auth\RegisterController@emailSent')->name('emailSent');
@@ -55,3 +75,7 @@ Route::get('admin/products', 'AdminController@showProducts');
 Route::post('admin/add-product', 'AdminController@addProduct');
 Route::post('admin/update-product', 'AdminController@updateProduct');
 Route::post('admin/delete-product', 'AdminController@deleteProduct');
+
+// Order Routes
+Route::post('admin/order-completed', 'AdminController@markOrderAsCompleted');
+Route::post('admin/order-incomplete', 'AdminController@markOrderAsInComplete');

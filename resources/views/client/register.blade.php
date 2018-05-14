@@ -1,6 +1,11 @@
 @extends('layout.client')
+
+@section('title')
+  Register - {{config('app.name')}}
+@endsection
+
 @section('content')
-  <div class="custom-form-wrapper">
+  <div class="custom-form-wrapper mt-6">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-8">
@@ -56,6 +61,18 @@
                   <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
                   <div class="col-md-6">
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="{{__('***********************')}}">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Residential Address') }}</label>
+                  <div class="col-md-6">
+                    <textarea name="address" class="form-control" style="resize: none;" id="address" rows="6" required placeholder="{{__('Model Town Lahore')}}" min="150"></textarea>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
+                  <div class="col-md-6">
+                    <input id="phone" type="number" class="form-control" name="phone" required placeholder="{{__('03001234567')}}" min="12">
                   </div>
                 </div>
                 <div class="form-group row">

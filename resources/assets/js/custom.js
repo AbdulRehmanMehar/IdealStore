@@ -8,3 +8,16 @@ $('.navbar-nav .nav-item .nav-link').each((i,element) => {
     $(element).addClass('active');
   }
 });
+
+
+
+
+
+// dynamic Add-to-Cart
+$('.add-to-cart').each((i,element) => {
+  $(element).click((event) => {
+    event.preventDefault();
+    $('#add-to-cart #p_id').val( $(element).attr('data-id') );
+    $('#add-to-cart').submit();
+  });
+});

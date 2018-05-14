@@ -1,5 +1,9 @@
 @extends('layout.client')
 
+@section('title')
+  Reset Password - {{config('app.name')}}
+@endsection
+
 @section('content')
 <div class="custom-form-wrapper">
   <div class="container">

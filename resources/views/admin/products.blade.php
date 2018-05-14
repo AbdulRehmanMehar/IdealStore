@@ -21,7 +21,7 @@
                   @foreach ($products as $product)
                     <tr id="tr{{$product->id}}">
                       <td>{{$product->name}}</td>
-                      <td>{{$product->details}}</td>
+                      <td>{{ substr($product->details, 0 , 20) . ' ...' }}</td>
                       <td>{{$product->price}}</td>
                       <td>{{$product->orders}}</td>
                       <td>{{$product->category}}</td>
@@ -31,7 +31,7 @@
                            <i class="fa fa-pencil-alt"></i>
                         </b> &nbsp;
                         <b class="trash" style="cursor: pointer;" data-id="{{$product->id}}"> <i class="fa fa-trash"></i> </b> &nbsp; &nbsp;
-                        <b><a href="{{url('/products/' . $product->slug )}}" target="_blank">View</a></b>
+                        <b><a href="{{url('/products/product/' . $product->slug )}}" target="_blank">View</a></b>
                       </td>
 
                     </tr>
@@ -77,7 +77,7 @@
               </div>
               <div class="form-group">
                 <label>Details</label>
-                <textarea name="p_details" class="form-control form-control-sm" rows="8" cols="80" style="resize:none;" required></textarea>
+                <textarea name="p_details" class="form-control form-control-sm" rows="13" cols="80" style="resize:none;" minlength="100" required></textarea>
               </div>
               <button type="submit" class="btn btn-primary btn-sm form-control">Add</button>
             </form>
@@ -117,7 +117,7 @@
               </div>
               <div class="form-group">
                 <label>Details</label>
-                <textarea id="u_details" name="u_details" class="form-control form-control-sm" rows="8" cols="80" style="resize:none;" required></textarea>
+                <textarea id="u_details" name="u_details" class="form-control form-control-sm" rows="13" cols="80" style="resize:none;" minlength="100" required></textarea>
               </div>
 
               <button type="submit" class="btn btn-primary btn-sm form-control">Update</button>

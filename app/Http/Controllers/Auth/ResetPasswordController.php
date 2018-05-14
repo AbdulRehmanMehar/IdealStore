@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 
+use App\Category;
+use App\Product;
+
 class ResetPasswordController extends Controller
 {
     /*
@@ -39,8 +42,12 @@ class ResetPasswordController extends Controller
     }
     public function showResetForm(Request $request, $token = null)
     {
-        return view('client.passwords.reset')->with(
-            ['token' => $token, 'email' => $request->email]
-        );
+      $data = [
+        'token' => $token,
+        'email' => $request->email,
+        'categories' => Category::all(),
+        'products' => Product::all()
+      ];
+      return view('client.passwords.reset')->with($data);
     }
 }

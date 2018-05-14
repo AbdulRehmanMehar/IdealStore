@@ -30,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'home';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -71,7 +71,7 @@ class LoginController extends Controller
         $newUser->save();
         Auth::login($newUser);
       }
-      return redirect('home');
+      return redirect('home/edit-profile');
     }
     // Validation for status i.e if status is 1, then user can login
     protected function credentials(Request $request)

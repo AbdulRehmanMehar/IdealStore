@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
   <link rel="icon" href="{{asset('img/logo.png')}}">
-  <title>{{config('app.name')}}</title>
+  <title>@yield('title')</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light fixed-top">
@@ -21,46 +21,40 @@
         <div class="cats-wrapper">
           <div class="triangle"></div>
           <div class="cats">
-            <a class="cat-main" href="#"><i class="fas fa-code icn"></i>Development</a>
-            <a class="cat-main" href="#"><i class="fas fa-briefcase icn"></i>Business</a>
-            <a class="cat-main" href="#"><i class="fas fa-desktop icn"></i>IT & Softwares</a>
-            <a class="cat-main" href="#"><i class="fas fa-building icn"></i>Office Productivity</a>
-            <a class="cat-main" href="#"><i class="fas fa-book icn"></i>Personal Development</a>
-            <a class="cat-main" href="#"><i class="fas fa-pencil-alt icn"></i>Design</a>
-            <a class="cat-main" href="#"><i class="fas fa-bullseye icn"></i>Marketing</a>
-            <a class="cat-main" href="#"><i class="fab fa-accessible-icon icn"></i>Life Style</a>
-            <a class="cat-main" href="#"><i class="fas fa-camera icn"></i>Photography</a>
-            <a class="cat-main" href="#"><i class="fas fa-heartbeat icn"></i>Health &amp; Fitness</a>
-            <a class="cat-main" href="#"><i class="fas fa-graduation-cap icn"></i>Teacher Training</a>
-            <a class="cat-main" href="#"><i class="fas fa-music icn"></i>Music</a>
-            <a class="cat-main" href="#"><i class="far fa-gem icn"></i>Academics</a>
-            <a class="cat-main" href="#"><i class="fas fa-language icn"></i>Language</a>
+            @foreach ($categories as $category)
+              <a class="cat-main" href="{{url('products/category/' . $category->name)}}"> {{$category->name}}</a>
+            @endforeach
           </div>
         </div>
       </li>
       <li class="nav-item">
-        <a href="about" class="nav-link">About Us</a>
-      </li>
-      <li class="nav-item">
-        <a href="contact" class="nav-link">Contact Us</a>
+        <a href="{{ url('contact') }}" class="nav-link">Contact Us</a>
       </li>
       <li class="nav-item searchBox">
-        <form action="#" method="get">
-          <input type="search" class="search-input" name="searchInput" placeholder="Search......">
-          <button type="button" class="search-button" name="searchButton"><i class="fa fa-search"></i></button>
+        <form id="search-form" action="{{url('products/search')}}" method="post">
+          @csrf
+          <input type="search" class="search-input" name="searchInput" id="searchInput" placeholder="Search......">
+          <button type="submit" class="search-button" name="searchButton"><i class="fa fa-search"></i></button>
         </form>
+        {{-- <div class="search-results" style="display:none;">
+          @foreach ($products as $product)
+            <a href="{{url('products/product/'. $product->slug)}}">{{$product->name}}</a>
+          @endforeach
+        </div> --}}
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a href="cart" class="nav-link"><i class="fas fa-shopping-basket"></i> Cart</a>
+        <a href="{{ url('products/show-cart') }}" class="nav-link">
+          <i class="fas fa-shopping-basket"></i> Cart  &nbsp; &nbsp;<span class="badge cartQtty">{{Session::has('cart') ? Session::get('cart')->totalQtty : "0"}}</span>
+        </a>
       </li>
       @guest
         <li class="nav-item">
-          <a href="login" class="nav-link"><i class="fas fa-sign-in-alt"></i> Login</a>
+          <a href="{{ url('login') }}" class="nav-link"><i class="fas fa-sign-in-alt"></i> Login</a>
         </li>
         <li class="nav-item">
-          <a href="register" class="nav-link"><i class="fas fa-user-plus"></i> Sign Up</a>
+          <a href="{{ url('register') }}" class="nav-link"><i class="fas fa-user-plus"></i> Sign Up</a>
         </li>
       @else
         <li class="nav-item dropdown">
@@ -69,7 +63,7 @@
             {{ Auth::user()->name }} <span class="caret"></span>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a href="home" class="dropdown-item">Dashboard</a>
+            <a href="{{ url('home') }}" class="dropdown-item">Dashboard</a>
             <a class="dropdown-item" href="{{ route('logout') }}"
                onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
@@ -85,6 +79,17 @@
   </div>
 </nav>
 @yield('content')
+
+
+<form id="add-to-cart" action="{{url('products/add-to-cart')}}" method="post" style="display:none;">
+  @csrf
+  <input type="hidden" name="p_id" id="p_id">
+  <input type="submit" value="Add">
+</form>
+
+<footer class="footer text-center">
+  <p>&copy; {{date('Y')}} {{config('app.name')}}.All rights reserved!</p>
+</footer>
 
 <div class="flash" id="flash-message"></div>
 
@@ -104,6 +109,24 @@
 </script>
 @endif
 
+
+@yield('scripts')
+
+
+<script>
+// Clear Console
+
+console.API;
+if (typeof console._commandLineAPI !== 'undefined') {
+    console.API = console._commandLineAPI; //chrome
+} else if (typeof console._inspectorCommandLineAPI !== 'undefined') {
+    console.API = console._inspectorCommandLineAPI; //Safari
+} else if (typeof console.clear !== 'undefined') {
+    console.API = console;
+}
+console.API.clear();
+
+</script>
 
 </body>
 </html>
